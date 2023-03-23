@@ -1,0 +1,10 @@
+
+.main-currentSong-Page{
+    min-height: 100vh;
+}
+
+.all-content-currentSongPage{
+    min-height: 100%;
+    background-color: aqua;
+}
+

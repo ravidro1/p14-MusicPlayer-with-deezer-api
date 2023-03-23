@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {createContext, useContext} from "react";
+import Data from "./Data";
+import {NavLink, Route, Routes} from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import DefaultPage from "./Pages/DefaultPage";
+import CurrentSongPage from "./Pages/CurrentSongPage";
+import PlayLists from "./Pages/PlayLists";
+
+export const DataContext = createContext();
 
 function App() {
+  const value = Data();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContext.Provider value={value}>
+      <div className="main-App-Page">
+        
+
+        <Routes>
+          <Route path="/" element={<HomePage />}/>
+          <Route path="/CurrentSong" element={<CurrentSongPage />}/>
+          <Route path="/PlayLists" element={<PlayLists />}/>
+          <Route path="*" element={<DefaultPage />}/>
+        </Routes>
+      </div>
+    </DataContext.Provider>
   );
 }
 
