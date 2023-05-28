@@ -1,24 +1,20 @@
-import React, {useContext} from "react";
-import {DataContext} from "../App";
-import Fetch from "../Components/Fetch";
-import NavBar from "../Components/NavBar";
+import React, { useContext } from "react";
+import { DataContext } from "../App";
+import NavBar from "../Components/NavBar/NavBar";
 import Search from "../Components/Search";
 import SongsListShow from "../Components/SongsListShow";
-import "./homePage.css";
 
-function HomePage(props) {
-  const {songName, searchResult, setSearchResult, navigate, setCurrentSong} =
-    useContext(DataContext);
+function HomePage() {
+  const { searchResult } = useContext(DataContext);
 
   return (
-    <div className="main-HomePage">
+    <main className="w-[100%] h-[100%] ">
       <NavBar />
       <Search />
-      <Fetch />
-      {searchResult?.data && (
-        <SongsListShow arrayOfSong={searchResult?.data} isInFavorite={false} />
-      )}
-    </div>
+      <section className="h-[80%]">
+        <SongsListShow arrayOfSong={searchResult?.data} />
+      </section>
+    </main>
   );
 }
 

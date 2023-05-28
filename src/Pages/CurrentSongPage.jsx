@@ -1,63 +1,65 @@
-import React, {useContext, useState} from "react";
-import {DataContext} from "../App";
-import NavBar from "../Components/NavBar";
-import "./currentSongPage.css";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { DataContext } from "../App";
+import NavBar from "../Components/NavBar/NavBar";
+import { useNavigate } from "react-router-dom";
+
+import AddToPlaylistWindow from "../Components/AddToPlaylistWindow";
+import CurrentSongComponentsHub from "../Components/CurrentSongPage/CurrentSongComponentsHub";
 
 function CurrentSongPage(props) {
-  const {currentSong} = useContext(DataContext);
-  console.log(currentSong);
+  const {
+    currentSongIndex,
+    setCurrentSongIndex,
+    searchResult,
+    fetchNext25,
+    currentPlaylist,
+  } = useContext(DataContext);
 
-  const audio = new Audio(currentSong?.preview);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (currentPlaylist == null || currentSongIndex == null) navigate("/");
+  }, []);
 
-  let volume = 0.5;
+  const [currentSongDetails, setCurrentSongDetails] = useState();
 
-  audio.volume = volume;
+  useEffect(() => {
+    setCurrentSongDetails(currentPlaylist.data[currentSongIndex]);
 
-  function volumeChange(upOrDown) {
-    if (upOrDown == "+") {
-      if (!(volume + 0.05 > 1)) {
-        volume += 0.05;
-      } else {
-        volume = 1;
-      }
-    } else {
-      if (!(volume - 0.05 < 0)) {
-        volume -= 0.05;
-      } else {
-        volume = 0;
-      }
+    if (currentSongIndex >= currentPlaylist.data.length - 3) {
+      const waitFunc = async () => {
+        await fetchNext25(currentPlaylist.next);
+      };
+      waitFunc();
     }
-    audio.volume = volume;
-    console.log(volume);
-  }
+  }, [currentSongIndex]);
+
+  const [isPlaylistWindowOpen, setIsPlaylistWindowOpen] = useState(false);
+
+  const changeCurrentSongIndex = (changeValue) => {
+    if (currentSongIndex + changeValue < 0) setCurrentSongIndex(0);
+    if (currentSongIndex + changeValue > searchResult.data.length - 1)
+      setCurrentSongIndex(searchResult.data.length - 1);
+    setCurrentSongIndex(0);
+    setCurrentSongIndex(currentSongIndex + changeValue);
+  };
 
   return (
-    <div className="main-currentSong-Page">
+    <div className="w-[100%] h-[100%] flex flex-col items-center-center text-white">
       <NavBar />
-      {console.log(audio.volume)}
-      <div className="all-content-currentSongPage">
-        <div> *** current playlist *** </div>
-
-        <img
-          src={currentSong?.album?.cover_medium}
-          alt={`${currentSong?.title} - not found picture`}
+      <CurrentSongComponentsHub
+        currentSongDetails={currentSongDetails}
+        currentSongIndex={currentSongIndex}
+        setCurrentSongIndex={setCurrentSongIndex}
+        setIsPlaylistWindowOpen={setIsPlaylistWindowOpen}
+        changeCurrentSongIndex={changeCurrentSongIndex}
+        playlist={currentPlaylist}
+      />
+      {isPlaylistWindowOpen && (
+        <AddToPlaylistWindow
+          isPlaylistWindowOpen={isPlaylistWindowOpen}
+          setIsPlaylistWindowOpen={setIsPlaylistWindowOpen}
         />
-        <div> Name: {currentSong?.title} </div>
-        <div> artist: {currentSong?.artist?.name} </div>
-        {/* <audio>
-          <source src={currentSong?.preview} type={"audio/mpeg"} />
-        </audio> */}
-
-        <div onClick={() => audio.play()}> play </div>
-        <div onClick={() => audio.pause()}> pause </div>
-        <button onClick={() => volumeChange("+")}> + </button>
-        <button onClick={() => volumeChange("-")}> - </button>
-      </div>
-
-      {/* <audio controls>
-        <source src={currentSong?.preview} type={"audio/mpeg"} />
-        Your browser does not support the audio element.
-      </audio> */}
+      )}
     </div>
   );
 }

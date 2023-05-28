@@ -1,15 +1,16 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import OneSong from "./OneSong";
-import "./searchResult.css";
 
-function SongsListShow({isInFavorite,arrayOfSong}) {
-
-
-
+function SongsListShow({  arrayOfSong }) {
   return (
-    <div className="main-SearchResult-Page">
-      {console.log(arrayOfSong.data)}
-      {arrayOfSong?.map((item, index) => <OneSong key={index} index={index} song={item} isInFavorite={isInFavorite}/>)}
+    <div className="w-[100%] h-[100%] overflow-auto flex flex-wrap justify-center">
+      {arrayOfSong?.map((item, index) => (
+        <OneSong
+          key={index}
+          index={index}
+          song={item}
+        />
+      ))}
     </div>
   );
 }

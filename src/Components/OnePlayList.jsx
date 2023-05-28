@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { DataContext } from '../App';
-import "./onePlayList.css"
 
 function OnePlayList({item, index}) {
 
