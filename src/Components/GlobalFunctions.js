@@ -1,7 +1,10 @@
-export const clickParent = (event,setState) => {
+export const clickParent = (event, dataValue = "parent") => {
   event.preventDefault();
-  let dataValue = event.target.getAttribute("data-value");
-  if (dataValue == "parent") {
-    setState(false);
+  let elementDataValue = event.target.getAttribute("data-value");
+  console.log(elementDataValue);
+  if (elementDataValue == dataValue) {
+    return true;
+  } else {
+    return false;
   }
 };

@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
 import OneSong from "./OneSong";
 
-function SongsListShow({ arrayOfSong }) {
-  console.log(arrayOfSong);
+function SongsListShow({ playlist, isInPlaylist }) {
+  // console.log(playlist);
   return (
     <div className="w-[100%] h-[100%] overflow-auto flex flex-wrap justify-center">
-      {arrayOfSong?.map((item, index) => (
-        <OneSong key={index} index={index} song={item} />
+      {playlist?.data?.map((item, index) => (
+        <OneSong
+          playlist={playlist}
+          isInPlaylist={isInPlaylist}
+          key={index}
+          index={index}
+          song={item}
+        />
       ))}
     </div>
   );

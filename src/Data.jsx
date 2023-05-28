@@ -6,14 +6,21 @@ function Data() {
   const [searchResult, setSearchResult] = useState("");
 
   const [currentSongIndex, setCurrentSongIndex] = useState(null);
-
-  const [currentPlaylist, setCurrentPlaylist] = useState({
-    data: null,
-    name: null,
-    next: null,
-  });
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
+  // {
+  //   data: null,
+  //   name: null,
+  //   next: null,
+  // }
 
   const [allPlaylists, setAllPlaylists] = useState([]);
+
+  useEffect(() => {
+    const updatePlaylist = allPlaylists.find(
+      (item) => item?.name == currentPlaylist?.name
+    );
+    if (updatePlaylist) setCurrentPlaylist(updatePlaylist);
+  }, [allPlaylists]);
 
   const navigate = useNavigate();
 
@@ -59,6 +66,10 @@ function Data() {
     });
   };
 
+  const resetCurrent = () => {
+    setCurrentPlaylist(null);
+    setCurrentSongIndex(null);
+  };
   return {
     navigate,
     fetchNext25,
@@ -74,6 +85,8 @@ function Data() {
 
     allPlaylists,
     setAllPlaylists,
+
+    resetCurrent,
   };
 }
 

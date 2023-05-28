@@ -4,7 +4,7 @@ import { DataContext } from "../../App";
 import NavBarButton from "./NavBarButton";
 
 function NavBar() {
-  const { currentSongIndex, allPlaylists, navigate } = useContext(DataContext);
+  const { currentSongIndex, currentPlaylist } = useContext(DataContext);
   return (
     <div className="w-[100%] h-[10%] flex justify-around items-center">
       <NavBarButton
@@ -23,8 +23,8 @@ function NavBar() {
         text={"PlayLists"}
       />
       <NavBarButton
-        isDisabled={currentSongIndex == null}
-        navigateAddress={"/CurrentPlayList"}
+        isDisabled={currentPlaylist == null}
+        navigateAddress={`/CurrentPlayList/${currentPlaylist?.name}`}
         text={"Current Playlist"}
       />
     </div>

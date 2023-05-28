@@ -20,13 +20,13 @@ function HomePage() {
         setIsInitSearchHappened={setIsInitSearchHappened}
       />
       <section className="h-[80%] flex justify-center items-center">
-        {isInitSearchHappened &&
+        {(isInitSearchHappened || searchResult.data) &&
           (searchLoading ? (
             <div className="w-[80px] aspect-square animate-spin">
               <Loading />
             </div>
           ) : searchResult?.data?.length > 0 && searchResult?.data != null ? (
-            <SongsListShow arrayOfSong={searchResult?.data} />
+            <SongsListShow isInPlaylist={false} playlist={searchResult} />
           ) : searchResult?.data == null ? (
             <h1 className="text-red-500 text-3xl">
               Error Occurred During The Search

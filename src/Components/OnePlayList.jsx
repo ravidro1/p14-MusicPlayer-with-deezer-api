@@ -1,22 +1,47 @@
 import React, { useContext } from "react";
+import { Trash } from "./IconExport";
 import { DataContext } from "../App";
+import { clickParent } from "./GlobalFunctions";
 
-function OnePlaylist({ item, index }) {
-  const {} = useContext(DataContext);
+function OnePlaylist({ item, index, setTempSelectedPlaylist }) {
+  const { allPlaylists, setAllPlaylists, resetCurrent } =
+    useContext(DataContext);
+
+  const deletePlaylist = (playlistIndex) => {
+    const newAllPlaylists = allPlaylists.filter(
+      (item, index) => index != playlistIndex
+    );
+    setAllPlaylists(newAllPlaylists);
+    resetCurrent();
+  };
 
   return (
     <div
-      style={{ backgroundColor: `${item.color}` }}
-      className="main-onePlayListPage"
+      data-value="parent"
+      onClick={(e) => {
+        if (clickParent(e)) setTempSelectedPlaylist(item);
+      }}
+      className="flex flex-col justify-center items-center w-[250px] h-[300px] bg-[rgba(255,255,255,0.25)] rounded-lg backdrop-blur-sm m-5 cursor-pointer"
     >
-      <div> Name: {item.name} </div>
-      <div> number of songs: {item.data?.length} </div>
-      <div
-        className="playlist-remove-Button-onPlayList-Page"
-        onClick={removeFromPlaylists_list}
+      <img data-value="parent" className="w-[100%] h-[55%]" src="" alt="" />
+      <h1
+        data-value="parent"
+        className="text-white w-[100%] h-[15%]  text-center"
       >
-        remove from playlist list
-      </div>
+        name: {item.name}
+      </h1>
+      <p
+        data-value="parent"
+        className="text-white w-[100%] h-[15%] text-center"
+      >
+        number of items: {item.data?.length}
+      </p>
+      <button
+        onClick={() => deletePlaylist(index)}
+        className="h-[10%] aspect-square"
+      >
+        <Trash />
+      </button>
     </div>
   );
 }

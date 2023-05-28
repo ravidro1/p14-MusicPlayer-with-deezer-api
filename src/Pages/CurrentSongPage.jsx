@@ -18,7 +18,7 @@ function CurrentSongPage(props) {
   const navigate = useNavigate();
   useEffect(() => {
     if (currentPlaylist == null || currentSongIndex == null) navigate("/");
-  }, []);
+  }, [currentPlaylist, currentSongIndex]);
 
   const [currentSongDetails, setCurrentSongDetails] = useState();
 
