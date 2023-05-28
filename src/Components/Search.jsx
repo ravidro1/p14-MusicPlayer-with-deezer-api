@@ -1,14 +1,43 @@
 import React, { useContext, useState } from "react";
 import { DataContext } from "../App";
+import axios from "axios";
 
-function Search(props) {
-  const { fetch } = useContext(DataContext);
+function Search({ setSearchLoading, setIsInitSearchHappened }) {
+  const { setCurrentPlaylist, setSearchResult } = useContext(DataContext);
 
   const [searchValue, setSearchValue] = useState("");
 
   function SearchSongs() {
+    setIsInitSearchHappened(true);
     fetch(searchValue);
   }
+
+  const fetch = (songName) => {
+    try {
+      setSearchLoading(true);
+      if (songName != "") {
+        axios
+          .request({
+            method: "GET",
+            url: process.env.REACT_APP_DEEZER_API,
+            params: { q: songName },
+            headers: {
+              "X-RapidAPI-Key": process.env.REACT_APP_X_RAPIDAPI_KEY,
+              "X-RapidAPI-Host": process.env.REACT_APP_X_RAPIDAPI_HOST,
+            },
+          })
+          .then((res) => {
+            // console.log(res.data);
+            setCurrentPlaylist({ ...res.data, name: "Search" });
+            setSearchResult(res.data);
+            setSearchLoading(false);
+          });
+      } else setSearchLoading(false);
+    } catch (error) {
+      console.log(error);
+      setSearchLoading(false);
+    }
+  };
 
   return (
     <form

@@ -17,32 +17,6 @@ function Data() {
 
   const navigate = useNavigate();
 
-  const options = (songName) => {
-    return {
-      method: "GET",
-      url: process.env.REACT_APP_DEEZER_API,
-      params: { q: songName },
-      headers: {
-        "X-RapidAPI-Key": process.env.REACT_APP_X_RAPIDAPI_KEY,
-        "X-RapidAPI-Host": process.env.REACT_APP_X_RAPIDAPI_HOST,
-      },
-    };
-  };
-
-  const fetch = (songName) => {
-    try {
-      if (songName != "") {
-        axios.request(options(songName)).then((res) => {
-          // console.log(res.data);
-          setCurrentPlaylist({ ...res.data, name: "Search" });
-          setSearchResult(res.data);
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const fetchNext25 = async (nextUrl) => {
     return new Promise((resolve, reject) => {
       try {
@@ -86,7 +60,6 @@ function Data() {
 
   return {
     navigate,
-    fetch,
     fetchNext25,
 
     searchResult,
