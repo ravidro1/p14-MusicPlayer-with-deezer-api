@@ -10,7 +10,7 @@ import {
   SignUpPage,
 } from "./Pages/export-pages";
 import "./style.css";
-import axios from "axios";
+import PlaylistsPage from "./Pages/PlaylistsPage";
 
 export const DataContext = createContext();
 
@@ -25,7 +25,7 @@ function App() {
           <Route path="/Login" element={<LoginPage />} />
           <Route path="/SignUp" element={<SignUpPage />} />
           <Route path="/CurrentSong" element={<CurrentSongPage />} />
-          {/* <Route path="/PlayLists" element={<PlayLists />} /> */}
+          <Route path="/PlayLists" element={<PlaylistsPage />} />
           <Route path="/CurrentPlayList" element={<CurrentPlaylistPage />} />
           <Route path="*" element={<DefaultPage />} />
         </Routes>

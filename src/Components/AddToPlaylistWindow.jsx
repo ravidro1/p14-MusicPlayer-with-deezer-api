@@ -1,18 +1,15 @@
 import React from "react";
+import { clickParent } from "./GlobalFunctions";
 
 export default function AddToPlaylistWindow({
   isPlaylistWindowOpen,
   setIsPlaylistWindowOpen,
 }) {
-  const isParentClick = (e) => {
-    console.log(e);
-    setIsPlaylistWindowOpen(false);
-  };
   return (
     <div
-      datatype="parent"
-      onClick={isParentClick}
-      className="w-[100vw] h-[100vh] bg-[#00000063] backdrop-blur-md fixed flex justify-center items-center"
+      data-value="parent"
+      onClick={(e) => clickParent(e, setIsPlaylistWindowOpen)}
+      className="w-[100vw] h-[100vh] bg-[#00000063] backdrop-blur-md fixed flex justify-center items-center z-50"
     >
       <div className="w-[40%] h-[55%] text-black rounded-lg overflow-hidden">
         <h1 className="w-[100%] h-[10%] bg-black text-white flex justify-center items-center text-2xl border-b">

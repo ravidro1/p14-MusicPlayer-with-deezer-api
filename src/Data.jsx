@@ -20,8 +20,9 @@ function Data() {
   const fetchNext25 = async (nextUrl) => {
     return new Promise((resolve, reject) => {
       try {
-        if (!nextUrl) reject();
+        if (!nextUrl) return reject("reject1");
         const paramsObj = { q: null, redirect_uri: null, index: null };
+
         String(currentPlaylist["next"])
           .split("?")[1]
           .split("&")
@@ -49,11 +50,11 @@ function Data() {
               name: "Search",
               data: [...currentPlaylist.data, ...res.data["data"]],
             });
-            resolve();
+            return resolve("resolve");
           });
       } catch (error) {
         console.log(error);
-        reject();
+        return reject("reject2");
       }
     });
   };
@@ -72,6 +73,7 @@ function Data() {
     setCurrentPlaylist,
 
     allPlaylists,
+    setAllPlaylists,
   };
 }
 

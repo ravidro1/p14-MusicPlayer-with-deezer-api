@@ -27,9 +27,11 @@ function Search({ setSearchLoading, setIsInitSearchHappened }) {
             },
           })
           .then((res) => {
-            // console.log(res.data);
-            setCurrentPlaylist({ ...res.data, name: "Search" });
-            setSearchResult(res.data);
+            if (res?.data?.error?.type == "Exception") fetch(songName);
+            else {
+              setCurrentPlaylist({ ...res.data, name: "Search" });
+              setSearchResult(res.data);
+            }
             setSearchLoading(false);
           });
       } else setSearchLoading(false);

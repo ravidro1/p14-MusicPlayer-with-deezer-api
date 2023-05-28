@@ -9,7 +9,7 @@ export default function FlowControlBar({
   songIndex,
 }) {
   const isDisable = (isForward) => {
-    if (playlist.length - 1 <= songIndex && isForward) return true;
+    if (playlist?.length - 1 <= songIndex && isForward) return true;
     else if (0 >= songIndex && !isForward) return true;
     return false;
   };

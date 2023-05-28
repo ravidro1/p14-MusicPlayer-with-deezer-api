@@ -18,9 +18,9 @@ function NavBar() {
         text={"Current Song"}
       />
       <NavBarButton
-        isDisabled={allPlaylists?.length <= 0}
+        isDisabled={false}
         navigateAddress={"/PlayLists"}
-        text={"PlayLists:" + allPlaylists?.length}
+        text={"PlayLists"}
       />
       <NavBarButton
         isDisabled={currentSongIndex == null}
