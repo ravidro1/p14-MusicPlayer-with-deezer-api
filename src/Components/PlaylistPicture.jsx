@@ -62,13 +62,13 @@ export default function PlaylistPicture({ playlist }) {
       className={
         //overflow-hidden
         "w-[100%] h-[100%] bg-[#ffffffcc]  " +
-        (arrayOfPicture.length > 0
+        (arrayOfPicture?.length > 0
           ? "grid"
           : "flex justify-center items-center")
       }
     >
-      {arrayOfPicture.length ? (
-        arrayOfPicture.map((pic, index) => {
+      {arrayOfPicture?.length ? (
+        arrayOfPicture?.map((pic, index) => {
           return (
             <img
               style={{

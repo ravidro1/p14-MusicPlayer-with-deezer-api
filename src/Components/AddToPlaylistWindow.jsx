@@ -50,17 +50,26 @@ export default function AddToPlaylistWindow({
                   <button
                     disabled={isSongAlreadyInPlaylist}
                     onClick={() => addToPlaylist(index)}
-                    className="border w-[100%] h-[15%] flex items-center justify-between hover:bg-red-600"
+                    className="border-b w-[100%] lg:h-[25%] sm:h-[20%] h-[15%] flex items-center justify-between relative "
                     key={index}
                   >
+                    <div className="w-[20%] h-[100%] absolute addToPlaylistHoverAnimation left-[0%] z-[1]"></div>
                     {/* <img src={onePlaylist.picture} alt="picture" /> */}
-                    <div className="h-[100%] aspect-square">
+                    <div className="h-[100%] aspect-square z-[1]">
                       <PlaylistPicture playlist={onePlaylist} />
                     </div>
                     {isSongAlreadyInPlaylist && (
-                      <p className="text-sm"> This Song Already In Playlist</p>
+                      <p className="text-sm z-[1]">
+                        {" "}
+                        This Song Already In Playlist
+                      </p>
                     )}
-                    <p>Songs: {onePlaylist?.data?.length}</p>
+                    <p className="z-[1]">
+                      Songs:{" "}
+                      {onePlaylist?.data?.length
+                        ? onePlaylist?.data?.length
+                        : 0}
+                    </p>
                   </button>
                 );
               })}

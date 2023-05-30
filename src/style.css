@@ -151,3 +151,14 @@
   box-shadow: 15px 15px 20px black;
   cursor: pointer;
 }
+
+.addToPlaylistHoverAnimation {
+  transition: width 1s ease-in-out, opacity 1s ease-in-out;
+  width: 50%;
+  background: #ffffff19;
+  opacity: 0;
+}
+button:hover .addToPlaylistHoverAnimation {
+  width: 100%;
+  opacity: 1;
+}

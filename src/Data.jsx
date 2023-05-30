@@ -17,7 +17,11 @@ function Data() {
   const [searchResult, setSearchResult] = useState(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [currentPlaylistIndex, setCurrentPlaylistIndex] = useState(null);
-  const [allPlaylists, setAllPlaylists] = useState([]);
+  const [allPlaylists, setAllPlaylists] = useState([
+    { data: null, name: "1", next: null },
+    { data: null, name: "2", next: null },
+    { data: null, name: "3", next: null },
+  ]);
   const [isPlaySong, setIsPlaySong] = useState(false);
   const [progress, setProgress] = useState(0);
 
