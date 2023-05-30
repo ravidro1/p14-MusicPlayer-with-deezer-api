@@ -6,12 +6,19 @@ export default function NavBarButton({ text, navigateAddress, isDisabled }) {
 
   return (
     <button
-      style={{ opacity: isDisabled ? 0.75 : 1 }}
+      style={{
+        opacity: isDisabled ? 0.5 : 1,
+        cursor: isDisabled ? "not-allowed" : "",
+      }}
       disabled={isDisabled}
       onClick={() => navigate(navigateAddress)}
-      className="text-white p-3 bg-black rounded-lg w-fit h-fit"
+      className={
+        "text-black bg-[#ffffff6b]  backdrop-blur-sm p-3  rounded-lg sm:w-fit w-[45%] sm:h-[60%] h-[40%] flex justify-center items-center " +
+        (!isDisabled && "hover:bg-[#ffffffa5]")
+      }
     >
       {text}
     </button>
   );
 }
+// text-white bg-black

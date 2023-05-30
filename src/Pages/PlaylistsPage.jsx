@@ -10,14 +10,9 @@ export default function PlaylistsPage() {
 
   const [isNewPlaylistWindowOpen, setIsNewPlaylistWindowOpen] = useState(false);
 
-  const [tempSelectedPlaylist, setTempSelectedPlaylist] = useState(null);
+  const [tempSelectedPlaylistIndex, setTempSelectedPlaylistIndex] =
+    useState(null);
 
-  useEffect(() => {
-    const updatePlaylist = allPlaylists.find(
-      (item) => item.name == tempSelectedPlaylist?.name
-    );
-    if (updatePlaylist) setTempSelectedPlaylist(updatePlaylist);
-  }, [allPlaylists]);
   return (
     <>
       {isNewPlaylistWindowOpen && (
@@ -25,26 +20,27 @@ export default function PlaylistsPage() {
           setIsNewPlaylistWindowOpen={setIsNewPlaylistWindowOpen}
         />
       )}
+
       <div className="w-full h-full ">
         <NavBar />
-        {tempSelectedPlaylist ? (
+        {tempSelectedPlaylistIndex != null ? (
           <section className="flex flex-col items-center w-[100%] h-[90%] pt-10">
             <div className="flex flex-col justify-between items-center w-[100%] h-[15%]">
               <button
-                onClick={() => setTempSelectedPlaylist(null)}
+                onClick={() => setTempSelectedPlaylistIndex(null)}
                 className="bg-white self-start p-3 mx-5 rounded-lg"
               >
                 Back To Playlists Page
               </button>
               <h1 className="text-3xl text-white h-fit">
-                Playlist: {tempSelectedPlaylist.name}
+                Playlist: {allPlaylists[tempSelectedPlaylistIndex]?.name}
               </h1>
             </div>
             <div className="flex flex-col justify-center items-center w-[100%] h-[85%]">
-              {tempSelectedPlaylist.data?.length > 0 ? (
+              {allPlaylists[tempSelectedPlaylistIndex]?.data?.length > 0 ? (
                 <SongsListShow
                   isInPlaylist={true}
-                  playlist={tempSelectedPlaylist}
+                  playlist={allPlaylists[tempSelectedPlaylistIndex]}
                 />
               ) : (
                 <h1 className="text-white text-4xl"> This Playlist Is Empty</h1>
@@ -58,10 +54,10 @@ export default function PlaylistsPage() {
               {allPlaylists?.map((item, index) => {
                 return (
                   <OnePlaylist
-                    setTempSelectedPlaylist={setTempSelectedPlaylist}
+                    setTempSelectedPlaylistIndex={setTempSelectedPlaylistIndex}
                     key={index}
                     item={item}
-                    index={index}
+                    playlistIndex={index}
                   />
                 );
               })}

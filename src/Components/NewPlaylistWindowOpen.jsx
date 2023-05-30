@@ -11,7 +11,7 @@ export default function NewPlaylistWindowOpen({ setIsNewPlaylistWindowOpen }) {
     next: null,
   });
 
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const changeNewPlaylistName = (value) => {
     setNewPlaylistData((prev) => {
@@ -24,11 +24,10 @@ export default function NewPlaylistWindowOpen({ setIsNewPlaylistWindowOpen }) {
       value == "search" ||
       allPlaylists.some((item) => item.name == value)
     )
-      setButtonDisabled(true);
-    else setButtonDisabled(false);
+      setIsButtonDisabled(true);
+    else setIsButtonDisabled(false);
   };
 
-  console.log(allPlaylists);
   return (
     <div
       data-value="parent"
@@ -43,12 +42,12 @@ export default function NewPlaylistWindowOpen({ setIsNewPlaylistWindowOpen }) {
           placeholder="name"
           type="text"
           value={newPlaylistData.name}
-          onChange={(e) => changeNewPlaylistName(e.target.value)}
+          onChange={(e) => changeNewPlaylistName(e.target.value.trim())}
         />
         <button
-          disabled={buttonDisabled}
+          disabled={isButtonDisabled}
           style={{
-            opacity: buttonDisabled ? 0.75 : 1,
+            opacity: isButtonDisabled ? 0.75 : 1,
           }}
           className="bg-black py-3 px-5 text-white rounded-lg"
           onClick={() => {

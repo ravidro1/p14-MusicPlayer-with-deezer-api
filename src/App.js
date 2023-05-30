@@ -16,9 +16,11 @@ export const DataContext = createContext();
 
 function App() {
   const value = Data();
-  // console.log(value.searchResult);
+  const { audioRef, getCurrentSongDetails } = value;
+
   return (
     <DataContext.Provider value={value}>
+      <audio ref={audioRef} src={getCurrentSongDetails()?.preview} />
       <div className="w-[100vw] h-[100vh] bg overflow">
         <Routes>
           <Route path="/" element={<HomePage />} />

@@ -9,33 +9,50 @@ function OneSong({ song, index, isInPlaylist, playlist }) {
   const {
     navigate,
     setCurrentSongIndex,
-    currentPlaylist,
-    setCurrentPlaylist,
     allPlaylists,
     setAllPlaylists,
-  } = useContext(DataContext);
+    setCurrentPlaylistIndex,
+    currentSongIndex,
 
-  function onSongPick(thisSong) {
-    setCurrentSongIndex(thisSong);
-    setCurrentPlaylist(playlist);
-    navigate("/CurrentSong");
-  }
+    currentPlaylistIndex,
+    playAndReset,
+  } = useContext(DataContext);
 
   const [isPlaylistWindowOpen, setIsPlaylistWindowOpen] = useState(false);
 
+  function onSongPick(thisSong) {
+    setCurrentPlaylistIndex(
+      allPlaylists.findIndex((item) => item.name == playlist.name)
+    );
+    setCurrentSongIndex(thisSong);
+    playAndReset();
+    navigate("/CurrentSong");
+  }
+
   const deleteFromPlaylist = () => {
     const copyAllPlaylists = [...allPlaylists];
-    const playlistIndex = copyAllPlaylists.findIndex(
-      (item) => playlist.name == item.name
+
+    const thisPlaylistIndex = copyAllPlaylists.findIndex(
+      (item) => playlist?.name == item?.name
     );
-    copyAllPlaylists[playlistIndex] = {
-      ...copyAllPlaylists[playlistIndex],
-      data: copyAllPlaylists[playlistIndex].data.filter(
+
+    copyAllPlaylists[thisPlaylistIndex] = {
+      ...copyAllPlaylists[thisPlaylistIndex],
+      data: copyAllPlaylists[thisPlaylistIndex].data.filter(
         (item) => item?.id != song?.id
       ),
     };
     setAllPlaylists(copyAllPlaylists);
-    setCurrentSongIndex(null);
+
+    if (thisPlaylistIndex == currentPlaylistIndex) {
+      if (copyAllPlaylists[thisPlaylistIndex].data.length > 0) {
+        let newCurrentSongIndex = currentSongIndex - 1;
+        if (newCurrentSongIndex < 0) newCurrentSongIndex = 0;
+        setCurrentSongIndex(newCurrentSongIndex);
+      } else {
+        setCurrentSongIndex(null);
+      }
+    }
   };
 
   return (
@@ -47,41 +64,46 @@ function OneSong({ song, index, isInPlaylist, playlist }) {
           item={song}
         />
       )}
-      <div className="w-[250px] h-[400px]  bg-[#000000] rounded-xl overflow-hidden m-5 songHoverAnimation cursor-pointer relative">
-        <div
+      <div className="sm:block flex justify-between sm:w-[250px] sm:h-[400px] w-[90%] aspect-[7/2]  bg-[#000000] rounded-xl overflow-hidden sm:m-5 m-2 songHoverAnimation cursor-pointer relative">
+        {/* <div
           data-value="parent"
           onClick={(e) => {
             if (clickParent(e)) onSongPick(index);
           }}
           className="absolute w-full h-full z-20 left-0 top-0"
-        />
+        /> */}
         <img
-          src={song.album.cover_medium}
-          alt={`(${song.title}) - pic not found`}
-          className="w-[250px] aspect-square"
+          src={song?.album?.cover_medium}
+          alt={`(${song?.title}) - pic not found`}
+          className="sm:w-[250px] sm:h-[auto] h-[100%] sm:max-w-[100%] sm:aspect-square max-w-[30%]"
         />
 
-        <div className="flex flex-col items-center justify-between p-2 h-[150px]">
-          <div className="text-white text-center text-xl h-[60%] overflow-ellipsis overflow-hidden w-[250px]">
-            {song.title}
-          </div>
-          <div className="text-white text-center h-[20%] overflow-ellipsis overflow-hidden w-[250px]">
-            {" "}
-            {song.artist.name}{" "}
-          </div>
+        <div className="flex sm:flex-col sm:justify-center items-center justify-between sm:p-2 sm:h-[150px] sm:w-[auto] w-[70%] px-2">
+          <section className="sm:w-[100%] sm:h-[60%] w-[70%] h-[100%] flex flex-col justify-around">
+            <div className="text-white text-center text-xl sm:h-[65%] overflow-ellipsis overflow-hidden sm:w-[100%]">
+              {song?.title}
+            </div>
+            <div className="text-white text-center text-base sm:h-[35%] overflow-ellipsis overflow-hidden sm:w-[100%]">
+              {song?.artist?.name}
+            </div>
+          </section>
 
-          {isInPlaylist && playlist?.name != "Search" ? (
-            <button
-              onClick={() => deleteFromPlaylist()}
-              className="h-[10%] aspect-square z-50"
-            >
-              <Trash />
-            </button>
-          ) : (
-            <PlusIconButton setIsPlaylistWindowOpen={setIsPlaylistWindowOpen} />
-          )}
+          <section className="w-[30%] sm:h-[40%] flex justify-center items-center">
+            {isInPlaylist && playlist?.name != "Search" ? (
+              <button
+                onClick={() => deleteFromPlaylist()}
+                className="sm:h-[10%] aspect-square z-50"
+              >
+                <Trash />
+              </button>
+            ) : (
+              <PlusIconButton
+                setIsPlaylistWindowOpen={setIsPlaylistWindowOpen}
+              />
+            )}
+          </section>
         </div>
-      </div>{" "}
+      </div>
     </>
   );
 }

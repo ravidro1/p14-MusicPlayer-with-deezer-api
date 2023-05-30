@@ -15,7 +15,7 @@ export default function VolumeBar({ audioRef }) {
         className="w-[85%] mx-2"
         onChange={(e) => setVolume(e.target.value)}
         value={volume}
-        min={0}
+        min={0.1}
         max={100}
         type="range"
       />

@@ -19,8 +19,8 @@ function HomePage() {
         setSearchLoading={setSearchLoading}
         setIsInitSearchHappened={setIsInitSearchHappened}
       />
-      <section className="h-[80%] flex justify-center items-center">
-        {(isInitSearchHappened || searchResult.data) &&
+      <section className="sm:h-[80%] h-[70%] flex justify-center items-center">
+        {(isInitSearchHappened || searchResult?.data) &&
           (searchLoading ? (
             <div className="w-[80px] aspect-square animate-spin">
               <Loading />

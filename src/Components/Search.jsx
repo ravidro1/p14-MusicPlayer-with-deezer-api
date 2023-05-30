@@ -3,7 +3,7 @@ import { DataContext } from "../App";
 import axios from "axios";
 
 function Search({ setSearchLoading, setIsInitSearchHappened }) {
-  const { setCurrentPlaylist, setSearchResult } = useContext(DataContext);
+  const { setSearchResult } = useContext(DataContext);
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -29,7 +29,6 @@ function Search({ setSearchLoading, setIsInitSearchHappened }) {
           .then((res) => {
             if (res?.data?.error?.type == "Exception") fetch(songName);
             else {
-              setCurrentPlaylist({ ...res.data, name: "Search" });
               setSearchResult({ ...res.data, name: "Search" });
             }
             setSearchLoading(false);
@@ -44,17 +43,17 @@ function Search({ setSearchLoading, setIsInitSearchHappened }) {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="flex justify-center w-[100%] h-[10%]"
+      className="flex justify-center items-center w-[100%] h-[10%]"
     >
       <input
-        className="w-[40%] h-[60%] rounded-xl p-3 mx-4"
+        className="sm:w-[40%] w-[65%] h-[60%] rounded-xl p-3 mx-2"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         placeholder="Song Name"
         type={"text"}
       />
       <button
-        className="text-white h-[60%] p-3 bg-black  rounded-lg w-fit  "
+        className="text-white h-[60%] px-5 bg-black  rounded-lg w-fit mx-2 "
         onClick={SearchSongs}
       >
         Search

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-export default function ProgressBar({ progressBarRef, audioRef, progress }) {
+export default function ProgressBar({ audioRef, progress }) {
   const getProgressInFormatTime = (seconds) => {
     const minutes = Math.floor(Math.floor(seconds) / 60);
 
@@ -26,10 +26,10 @@ export default function ProgressBar({ progressBarRef, audioRef, progress }) {
     <section className="flex w-[300px] h-[10%] justify-between items-center">
       <p className="w-[15%]">{getProgressInFormatTime(progress)}</p>
       <input
-        ref={progressBarRef}
+        id="progressBar"
         className="w-[65%]"
         onChange={(e) => changeProgressBar(e.target.value)}
-        defaultValue={0}
+        value={progress}
         min={0}
         max={Math.floor(
           isNaN(audioRef?.current?.duration) ? 100 : audioRef?.current?.duration
@@ -43,7 +43,6 @@ export default function ProgressBar({ progressBarRef, audioRef, progress }) {
           )
         )}
       </p>
-      {/* <p className="w-[15%]">{getProgressInFormatTime(Math.floor(duration))}</p> */}
     </section>
   );
 }

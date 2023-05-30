@@ -7,6 +7,8 @@ export default function FlowControlBar({
   changeCurrentSongIndex,
   playlist,
   songIndex,
+  isPlaySong,
+  setIsPlaySong,
 }) {
   const isDisable = (isForward) => {
     if (playlist?.length - 1 <= songIndex && isForward) return true;
@@ -22,8 +24,8 @@ export default function FlowControlBar({
         onClick={changeCurrentSongIndex}
       />
 
-      <button className="w-[30%]" onClick={() => playAndPause()}>
-        {paused ? <PlayIcon /> : <PauseIcon />}
+      <button className="w-[30%]" onClick={() => setIsPlaySong(!isPlaySong)}>
+        {!isPlaySong ? <PlayIcon /> : <PauseIcon />}
       </button>
 
       <ForwardAndBackwardButton

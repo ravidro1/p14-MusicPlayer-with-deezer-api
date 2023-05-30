@@ -34,8 +34,8 @@ export default function AddToPlaylistWindow({
           {allPlaylists?.length > 0 ? (
             <div className="w-[100%] h-[100%] overflow-auto">
               {allPlaylists?.map((onePlaylist, index) => {
-                const isSongAlreadyInPlaylist = onePlaylist.data.some(
-                  (element) => element.id == item.id
+                const isSongAlreadyInPlaylist = onePlaylist?.data?.some(
+                  (element) => element?.id == item?.id
                 );
                 return (
                   <button

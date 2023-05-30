@@ -4,10 +4,6 @@ import {
   VolumeLowIcon,
   VolumeMediumIcon,
   VolumeMuteIcon,
-  volumeHighIcon,
-  volumeLowIcon,
-  volumeMediumIcon,
-  volumeMuteIcon,
 } from "../IconExport";
 
 export default function VolumeIconSelector({ volume }) {
