@@ -12,9 +12,14 @@ export default function AddToPlaylistWindow({
 
   const addToPlaylist = (playlistIndex) => {
     const copyAllPlaylists = [...allPlaylists];
+
+    const prevData = copyAllPlaylists[playlistIndex]?.data
+      ? copyAllPlaylists[playlistIndex]?.data
+      : [];
+
     copyAllPlaylists[playlistIndex] = {
       ...copyAllPlaylists[playlistIndex],
-      data: [...copyAllPlaylists[playlistIndex].data, item],
+      data: [...prevData, item],
     };
     setAllPlaylists(copyAllPlaylists);
     setIsPlaylistWindowOpen(false);
@@ -47,12 +52,16 @@ export default function AddToPlaylistWindow({
                   (element) => element?.id == item?.id
                 );
                 return (
-                  <button
-                    disabled={isSongAlreadyInPlaylist}
-                    onClick={() => addToPlaylist(index)}
-                    className="border-b w-[100%] lg:h-[25%] sm:h-[20%] h-[15%] flex items-center justify-between relative "
+                  <div
+                    className="addToPlaylistHoverAnimationParent border-b w-[100%] lg:h-[25%] sm:h-[20%] h-[15%] flex items-center justify-between relative "
                     key={index}
                   >
+                    <button
+                      disabled={isSongAlreadyInPlaylist}
+                      data-value="parent"
+                      onClick={() => addToPlaylist(index)}
+                      className="absolute w-full h-full z-20 left-0 top-0"
+                    />
                     <div className="h-[100%] absolute addToPlaylistHoverAnimation left-[0%] z-[1]"></div>
 
                     <div className="h-[100%] aspect-square z-[1]">
@@ -70,7 +79,7 @@ export default function AddToPlaylistWindow({
                         ? onePlaylist?.data?.length
                         : 0}
                     </p>
-                  </button>
+                  </div>
                 );
               })}
             </div>

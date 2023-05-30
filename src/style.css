@@ -158,7 +158,7 @@
   background: #ffffff19;
   opacity: 0;
 }
-button:hover .addToPlaylistHoverAnimation {
+.addToPlaylistHoverAnimationParent:hover .addToPlaylistHoverAnimation {
   width: 100%;
   opacity: 1;
 }
