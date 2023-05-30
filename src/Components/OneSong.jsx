@@ -65,13 +65,13 @@ function OneSong({ song, index, isInPlaylist, playlist }) {
         />
       )}
       <div className="sm:block flex justify-between sm:w-[250px] sm:h-[400px] w-[90%] aspect-[7/2]  bg-[#000000] rounded-xl overflow-hidden sm:m-5 m-2 songHoverAnimation cursor-pointer relative">
-        {/* <div
+        <div
           data-value="parent"
           onClick={(e) => {
             if (clickParent(e)) onSongPick(index);
           }}
           className="absolute w-full h-full z-20 left-0 top-0"
-        /> */}
+        />
         <img
           src={song?.album?.cover_medium}
           alt={`(${song?.title}) - pic not found`}

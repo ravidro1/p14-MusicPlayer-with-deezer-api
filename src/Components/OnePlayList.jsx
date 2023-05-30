@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Trash } from "./IconExport";
 import { DataContext } from "../App";
 import { clickParent } from "./GlobalFunctions";
+import PlaylistPicture from "./PlaylistPicture";
 
 function OnePlaylist({ item, playlistIndex, setTempSelectedPlaylistIndex }) {
   const {
@@ -46,9 +47,11 @@ function OnePlaylist({ item, playlistIndex, setTempSelectedPlaylistIndex }) {
       onClick={(e) => {
         if (clickParent(e)) setTempSelectedPlaylistIndex(playlistIndex);
       }}
-      className="flex flex-col justify-center items-center w-[250px] h-[300px] bg-[rgba(255,255,255,0.25)] rounded-lg backdrop-blur-sm m-5 cursor-pointer"
+      className="flex flex-col justify-between items-center w-[250px] h-[300px] bg-[rgba(255,255,255,0.25)] rounded-lg backdrop-blur-sm m-5 cursor-pointer overflow-hidden"
     >
-      <img data-value="parent" className="w-[100%] h-[55%]" src="" alt="" />
+      <div className="w-[100%] h-[60%] ">
+        <PlaylistPicture playlist={allPlaylists[playlistIndex]} />
+      </div>
       <h1
         data-value="parent"
         className="text-white w-[100%] h-[15%]  text-center"

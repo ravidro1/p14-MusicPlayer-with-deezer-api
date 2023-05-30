@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { clickParent } from "./GlobalFunctions";
 import { DataContext } from "../App";
+import PlaylistPicture from "./PlaylistPicture";
 
 export default function AddToPlaylistWindow({
   isPlaylistWindowOpen,
@@ -26,11 +27,19 @@ export default function AddToPlaylistWindow({
       }}
       className="w-[100vw] h-[100vh] bg-[#00000063] backdrop-blur-md fixed flex justify-center items-center z-50 left-0 top-0"
     >
-      <div className="w-[55%] h-[55%] text-black rounded-lg overflow-hidden">
-        <h1 className="w-[100%] h-[10%] bg-black text-white flex justify-center items-center text-2xl border-b">
-          Playlists:{" "}
-        </h1>
-        <div className="w-[100%] h-[90%] bg-black text-white flex justify-center items-center">
+      <div className="lg:w-[65%] lg:h-[65%] sm:w-[80%] sm:h-[70%] w-[95%] h-[95%] text-black rounded-lg overflow-hidden">
+        <section className="h-[10%] w-[100%] bg-black border-b relative flex items-center">
+          <button
+            onClick={() => setIsPlaylistWindowOpen(false)}
+            className=" text-white flex justify-center items-center text-2xl absolute w-[5%] aspect-square m-5 hover:bg-[#ffffff91] hover:text-black rounded-md "
+          >
+            X
+          </button>
+          <h1 className=" text-white flex justify-center items-center text-2xl absolute left-[50%] translate-x-[-50%]">
+            Playlists:{" "}
+          </h1>
+        </section>
+        <section className="w-[100%] h-[90%] bg-black text-white flex justify-center items-center">
           {allPlaylists?.length > 0 ? (
             <div className="w-[100%] h-[100%] overflow-auto">
               {allPlaylists?.map((onePlaylist, index) => {
@@ -44,7 +53,10 @@ export default function AddToPlaylistWindow({
                     className="border w-[100%] h-[15%] flex items-center justify-between hover:bg-red-600"
                     key={index}
                   >
-                    <img src={onePlaylist.picture} alt="picture" />
+                    {/* <img src={onePlaylist.picture} alt="picture" /> */}
+                    <div className="h-[100%] aspect-square">
+                      <PlaylistPicture playlist={onePlaylist} />
+                    </div>
                     {isSongAlreadyInPlaylist && (
                       <p className="text-sm"> This Song Already In Playlist</p>
                     )}
@@ -54,9 +66,9 @@ export default function AddToPlaylistWindow({
               })}
             </div>
           ) : (
-            <h1> No </h1>
+            <h1> There Are No Playlists Listed </h1>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );
