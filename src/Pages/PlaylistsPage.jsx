@@ -3,7 +3,7 @@ import NavBar from "../Components/NavBar/NavBar";
 import { DataContext } from "../App";
 import NewPlaylistWindowOpen from "../Components/NewPlaylistWindowOpen";
 import SongsListShow from "../Components/SongsListShow";
-import OnePlaylist from "../Components/OnePlayllist";
+import OnePlaylist from "../Components/OnePlaylist";
 
 export default function PlaylistsPage() {
   const { allPlaylists, setAllPlaylists } = useContext(DataContext);
