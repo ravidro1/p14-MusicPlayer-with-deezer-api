@@ -73,5 +73,4 @@ function OnePlaylist({ item, playlistIndex, setTempSelectedPlaylistIndex }) {
     </div>
   );
 }
-
 export default OnePlaylist;

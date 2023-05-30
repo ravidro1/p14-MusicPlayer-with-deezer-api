@@ -53,8 +53,8 @@ export default function AddToPlaylistWindow({
                     className="border-b w-[100%] lg:h-[25%] sm:h-[20%] h-[15%] flex items-center justify-between relative "
                     key={index}
                   >
-                    <div className="w-[20%] h-[100%] absolute addToPlaylistHoverAnimation left-[0%] z-[1]"></div>
-                    {/* <img src={onePlaylist.picture} alt="picture" /> */}
+                    <div className="h-[100%] absolute addToPlaylistHoverAnimation left-[0%] z-[1]"></div>
+
                     <div className="h-[100%] aspect-square z-[1]">
                       <PlaylistPicture playlist={onePlaylist} />
                     </div>
