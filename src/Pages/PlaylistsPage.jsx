@@ -24,7 +24,7 @@ export default function PlaylistsPage() {
       <div className="w-full h-full ">
         <NavBar />
         {tempSelectedPlaylistIndex != null ? (
-          <section className="flex flex-col items-center w-[100%] h-[90%] pt-10">
+          <section className="flex flex-col items-center w-[100%] sm:h-[90%] h-[80%] pt-10">
             <div className="flex flex-col justify-between items-center w-[100%] h-[15%]">
               <button
                 onClick={() => setTempSelectedPlaylistIndex(null)}
@@ -43,13 +43,19 @@ export default function PlaylistsPage() {
                   playlist={allPlaylists[tempSelectedPlaylistIndex]}
                 />
               ) : (
-                <h1 className="text-white text-4xl"> This Playlist Is Empty</h1>
+                <h1 className="text-white text-4xl text-center">
+                  {" "}
+                  This Playlist Is Empty
+                </h1>
               )}
             </div>
           </section>
         ) : (
-          <section className="flex flex-col items-center w-[100%] h-[90%] pt-10">
-            <h1 className="text-3xl text-white h-[10%]"> Playlists</h1>
+          <section className="flex flex-col items-center w-[100%] sm:h-[90%] h-[80%] pt-10">
+            <h1 className="text-3xl text-white h-[10%] flex justify-center items-center">
+              {" "}
+              Playlists
+            </h1>
             <div className="h-[90%] w-[100%] flex flex-wrap justify-center overflow-auto">
               {allPlaylists?.map((item, index) => {
                 return (
@@ -63,7 +69,7 @@ export default function PlaylistsPage() {
               })}
               <button
                 onClick={() => setIsNewPlaylistWindowOpen(true)}
-                className=" flex justify-center items-center w-[250px] h-[300px] bg-[rgba(255,255,255,0.25)] rounded-lg backdrop-blur-sm m-5"
+                className=" flex justify-center items-center sm:w-[250px] sm:h-[300px] w-[90%] h-[110px] bg-[rgba(255,255,255,0.25)] rounded-lg backdrop-blur-sm m-5"
               >
                 <div className="rounded-full bg-[#ffffff73]  h-[70px] w-[70px] flex justify-center items-center text-6xl text-white">
                   <p className=" h-[70px] w-[70px]">+</p>

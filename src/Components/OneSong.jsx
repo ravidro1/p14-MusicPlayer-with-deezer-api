@@ -4,6 +4,7 @@ import PlusIconButton from "./PlusIconButton";
 import AddToPlaylistWindow from "./AddToPlaylistWindow";
 import { clickParent } from "./GlobalFunctions";
 import { Trash } from "./IconExport";
+import TrashIconButton from "./TrashIconButton";
 
 function OneSong({ song, index, isInPlaylist, playlist }) {
   const {
@@ -64,8 +65,8 @@ function OneSong({ song, index, isInPlaylist, playlist }) {
           item={song}
         />
       )}
-      <div className="sm:block flex justify-between sm:w-[250px] sm:h-[400px] w-[90%] aspect-[7/2]  bg-[#000000] rounded-xl overflow-hidden sm:m-5 m-2 songHoverAnimation cursor-pointer relative">
-        <div
+      <div className="sm:block flex justify-between sm:w-[250px] sm:h-[400px] w-[90%] h-[110px] bg-[#000000] rounded-xl overflow-hidden sm:m-5 m-2 songHoverAnimation cursor-pointer relative">
+        <button
           data-value="parent"
           onClick={(e) => {
             if (clickParent(e)) onSongPick(index);
@@ -88,14 +89,9 @@ function OneSong({ song, index, isInPlaylist, playlist }) {
             </div>
           </section>
 
-          <section className="w-[30%] sm:h-[40%] flex justify-center items-center">
+          <section className="w-[30%] sm:h-[40%] flex justify-center items-center sm:p-1 p-4">
             {isInPlaylist && playlist?.name != "Search" ? (
-              <button
-                onClick={() => deleteFromPlaylist()}
-                className="sm:h-[10%] aspect-square z-50"
-              >
-                <Trash />
-              </button>
+              <TrashIconButton onClick={deleteFromPlaylist} />
             ) : (
               <PlusIconButton
                 setIsPlaylistWindowOpen={setIsPlaylistWindowOpen}

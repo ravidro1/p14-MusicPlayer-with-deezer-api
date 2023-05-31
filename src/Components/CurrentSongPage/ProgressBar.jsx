@@ -23,8 +23,8 @@ export default function ProgressBar({ audioRef, progress }) {
   };
 
   return (
-    <section className="flex w-[300px] h-[10%] justify-between items-center">
-      <p className="w-[15%]">{getProgressInFormatTime(progress)}</p>
+    <section className=" w-[100%] h-[100%] flex justify-between items-center">
+      <p className="w-fit">{getProgressInFormatTime(progress)}</p>
       <input
         id="progressBar"
         className="w-[65%]"
@@ -36,7 +36,7 @@ export default function ProgressBar({ audioRef, progress }) {
         )}
         type="range"
       />
-      <p className="w-[15%]">
+      <p className="w-fit">
         {getProgressInFormatTime(
           Math.floor(
             isNaN(audioRef?.current?.duration) ? 0 : audioRef?.current?.duration

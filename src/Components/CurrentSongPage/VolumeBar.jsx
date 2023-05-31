@@ -10,7 +10,7 @@ export default function VolumeBar({ audioRef }) {
   }, [volume]);
 
   return (
-    <section className="w-[200px] h-[10%] flex items-center justify-between">
+    <section className="w-[100%] h-[100%] flex items-center justify-between">
       <input
         className="w-[85%] mx-2"
         onChange={(e) => setVolume(e.target.value)}

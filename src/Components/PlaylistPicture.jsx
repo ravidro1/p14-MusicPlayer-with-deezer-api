@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { DataContext } from "../App";
 
 export default function PlaylistPicture({ playlist }) {
+  const { allPlaylists } = useContext(DataContext);
+
   const [arrayOfPicture, setArrayOfPicture] = useState([]);
   const [numberOfRowsAndColumns, setNumberOfRowsAndColumns] = useState(0);
 
@@ -44,13 +47,12 @@ export default function PlaylistPicture({ playlist }) {
 
   useEffect(() => {
     getArrayOfPicture();
-  }, []);
+  }, [allPlaylists]);
 
   useEffect(() => {
     calcImageArea();
   }, [arrayOfPicture]);
 
-  console.log(gridPlaceArray);
   return (
     <div
       style={{

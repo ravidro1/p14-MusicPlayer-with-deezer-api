@@ -35,37 +35,44 @@ function CurrentSongPage(props) {
   return (
     <div className="w-[100%] h-[100%] flex flex-col items-center-center text-white">
       <NavBar />
-      <div className="w-[100%] h-[90%] flex flex-col items-center justify-between">
-        <section className="h-[55%] aspect-square">
+      <div className="w-[100%] sm:h-[90%] h-[80%] flex flex-col items-center justify-between">
+        <section className="h-[55%] w-[100%] flex justify-center ">
           <img
-            className=""
+            className="max-w-[500px] aspect-square w-[100%] "
             src={getCurrentSongDetails()?.album?.cover_big}
             alt={`${getCurrentSongDetails()?.title} - not found picture`}
           />
         </section>
-        <section className="h-[45%] flex flex-col justify-between items-center">
-          <div className="text-4xl p-3 h-[20%]">
+        <section className="h-[45%] w-[100%] flex flex-col justify-between items-center">
+          <div className="sm:text-4xl text-2xl  h-[20%] flex justify-between items-center">
             {" "}
             {getCurrentSongDetails()?.title}{" "}
           </div>
-          <div className="text-2xl p-3  h-[15%]">
+          <div className="sm:text-2xl text-xl  h-[15%] flex justify-between items-center">
             {" "}
             {getCurrentSongDetails()?.artist?.name}{" "}
           </div>
 
-          <FlowControlBar
-            playlist={getCurrentPlaylist()?.data}
-            songIndex={currentSongIndex}
-            changeCurrentSongIndex={changeCurrentSongIndex}
-            paused={audioRef?.current?.paused}
-            isPlaySong={isPlaySong}
-            setIsPlaySong={setIsPlaySong}
-          />
+          <div className="w-[60%] max-w-[450px] h-[20%] flex justify-between items-center">
+            <FlowControlBar
+              playlist={getCurrentPlaylist()?.data}
+              songIndex={currentSongIndex}
+              changeCurrentSongIndex={changeCurrentSongIndex}
+              paused={audioRef?.current?.paused}
+              isPlaySong={isPlaySong}
+              setIsPlaySong={setIsPlaySong}
+            />
+          </div>
+          <div className=" w-[95%] h-[15%] max-w-[300px] flex justify-between items-center">
+            <ProgressBar audioRef={audioRef} progress={progress} />
+          </div>
+          <div className="max-w-[220px] w-[80%] h-[15%] flex justify-between items-center">
+            <VolumeBar audioRef={audioRef} />
+          </div>
 
-          <ProgressBar audioRef={audioRef} progress={progress} />
-          <VolumeBar audioRef={audioRef} />
-
-          <PlusIconButton setIsPlaylistWindowOpen={setIsPlaylistWindowOpen} />
+          <div className="h-[15%] flex justify-between items-center">
+            <PlusIconButton setIsPlaylistWindowOpen={setIsPlaylistWindowOpen} />
+          </div>
         </section>
       </div>
       {isPlaylistWindowOpen && (

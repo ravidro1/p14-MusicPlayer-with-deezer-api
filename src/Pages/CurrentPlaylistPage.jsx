@@ -10,7 +10,7 @@ function CurrentPlaylistPage({}) {
     <div className="w-[100%] h-[100%]">
       <NavBar />
 
-      <section className="w-[100%] h-[90%] flex justify- items-center flex-col pt-10">
+      <section className="w-[100%] sm:h-[90%] h-[80%] flex justify- items-center flex-col pt-10">
         <h1 className="text-white text-4xl">{getCurrentPlaylist()?.name}</h1>
         <SongsListShow playlist={getCurrentPlaylist()} isInPlaylist={true} />
       </section>

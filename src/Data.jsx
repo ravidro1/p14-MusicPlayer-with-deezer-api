@@ -1,12 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// {
-//   data: null,
-//   name: null,
-//   next: null,
-// }
+import { v4 as uuidv4 } from "uuid";
 
 function Data() {
   const navigate = useNavigate();
@@ -15,12 +10,14 @@ function Data() {
   const animationRef = useRef();
 
   const [searchResult, setSearchResult] = useState(null);
+  const [searchResultID] = useState(uuidv4());
+
   const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [currentPlaylistIndex, setCurrentPlaylistIndex] = useState(null);
   const [allPlaylists, setAllPlaylists] = useState([
-    { data: null, name: "1", next: null },
-    { data: null, name: "2", next: null },
-    { data: null, name: "3", next: null },
+    // { data: null, name: "1", next: null, id: uuidv4() },
+    // { data: null, name: "2", next: null, id: uuidv4() },
+    // { data: null, name: "3", next: null, id: uuidv4() },
   ]);
   const [isPlaySong, setIsPlaySong] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -56,6 +53,7 @@ function Data() {
             setSearchResult({
               ...res.data,
               name: "Search",
+              id: searchResultID,
               data: [...searchResult.data, ...res.data["data"]],
             });
             return resolve("resolve");
@@ -171,6 +169,7 @@ function Data() {
     getCurrentPlaylist,
     playAndReset,
     pauseAndReset,
+    getCurrentPlaylist,
   };
 }
 

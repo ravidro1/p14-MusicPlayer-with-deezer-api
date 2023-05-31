@@ -30,8 +30,8 @@ function Search({ setSearchLoading, setIsInitSearchHappened }) {
             if (res?.data?.error?.type == "Exception") fetch(songName);
             else {
               setSearchResult({ ...res.data, name: "Search" });
+              setSearchLoading(false);
             }
-            setSearchLoading(false);
           });
       } else setSearchLoading(false);
     } catch (error) {

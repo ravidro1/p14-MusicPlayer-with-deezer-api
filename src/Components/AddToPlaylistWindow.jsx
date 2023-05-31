@@ -24,6 +24,7 @@ export default function AddToPlaylistWindow({
     setAllPlaylists(copyAllPlaylists);
     setIsPlaylistWindowOpen(false);
   };
+
   return (
     <div
       data-value="parent"
@@ -32,7 +33,7 @@ export default function AddToPlaylistWindow({
       }}
       className="w-[100vw] h-[100vh] bg-[#00000063] backdrop-blur-md fixed flex justify-center items-center z-50 left-0 top-0"
     >
-      <div className="lg:w-[65%] lg:h-[65%] sm:w-[80%] sm:h-[70%] w-[95%] h-[95%] text-black rounded-lg overflow-hidden">
+      <div className="lg:w-[65%] lg:h-[65%] sm:w-[80%] sm:h-[70%] w-[100%] h-[100%] sm:rounded-lg overflow-hidden">
         <section className="h-[10%] w-[100%] bg-black border-b relative flex items-center">
           <button
             onClick={() => setIsPlaylistWindowOpen(false)}

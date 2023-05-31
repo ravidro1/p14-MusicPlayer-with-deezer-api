@@ -17,14 +17,14 @@ export default function FlowControlBar({
   };
 
   return (
-    <section className="flex items-center w-[200px] h-[30%] justify-between">
+    <section className="flex items-center w-[100%] h-[100%] justify-between">
       <ForwardAndBackwardButton
         component={"backward"}
         isDisabled={isDisable(false)}
         onClick={changeCurrentSongIndex}
       />
 
-      <button className="w-[30%]" onClick={() => setIsPlaySong(!isPlaySong)}>
+      <button className="h-[80%]" onClick={() => setIsPlaySong(!isPlaySong)}>
         {!isPlaySong ? <PlayIcon /> : <PauseIcon />}
       </button>
 
@@ -43,7 +43,7 @@ const ForwardAndBackwardButton = ({ onClick, component, isDisabled }) => {
   return (
     <button
       disabled={isDisabled}
-      className="w-[20%] aspect-square"
+      className="h-[70%] aspect-square"
       onClick={() => onClick(component == "forward" ? 1 : -1)}
     >
       {component == "forward" ? (
